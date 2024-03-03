@@ -1,0 +1,173 @@
+*,*::before,*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --marine-blue: hsl(213, 96%, 18%);
+    --purpleblue: hsl(243, 100%, 62%);
+    --pastel-blue: hsl(228, 100%, 84%);
+    --light-blue: hsl(206, 94%, 87%);
+    --red: hsl(354, 84%, 57%);
+    --gray: hsl(231, 11%, 63%);
+    --light-gray: hsl(229, 24%, 87%);
+    --magnolia: hsl(217, 100%, 97%);
+    --alabaster: hsl(231, 100%, 99%);
+    --white: hsl(0, 0%, 100%);
+}
+
+body{
+    font-family: "Ubuntu", sans-serif;
+    display: flex;
+    /* height: 100vh; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background-color: var( --light-gray);
+    padding: 1rem;
+}
+main{
+    margin: 2rem 0;
+    margin-inline: auto;
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.step1__content,
+.step3__content,
+.step4__content,
+.step5__content
+{
+    display: none;
+}
+aside{
+    max-width: 260px;
+    width: 100%;
+    border-radius: 10px;
+    background-image: url(./assets/images/bg-sidebar-desktop.svg);
+    background-color: var(--purpleblue);
+    background-size: cover;
+    padding: 2rem;   
+}
+.steps{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+.step{
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    color: var(--white);
+    text-transform: uppercase;
+}
+.step__title{
+    color: var(--gray);
+}
+.step__no{
+    grid-row: span 2;
+    padding: 0.5rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+article{
+    padding: 2rem;
+}
+h1,h2{
+    color: var(--marine-blue);
+    font-weight: 700;
+}
+h1{
+    font-size: 2rem;
+    line-height: 1.6;
+}
+article > p{
+    color: var(--gray);
+}
+form{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.form__data{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.form__data > label{
+    color: var(--marine-blue);
+    font-weight: 500;
+}
+.form__data > input{
+    padding: 0.8rem 1rem;
+    font-family: inherit;
+    border: 1px solid var(--light-gray);
+    border-radius: 10px;
+}
+.form__data > input::placeholder{
+    color:var(--gray);
+    font-weight: 700;
+}
+
+/* step 2 */
+.step2__content{
+    display: flex;
+    flex-direction: column;
+}
+.plan__container{
+    /* display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+    gap: 1rem;
+}
+.plan{
+    margin: 2rem 0;
+    padding: 1.5rem 1rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 80px 1fr 1fr;
+    width: 150px;
+    max-width: 100%;
+    gap: 0.3rem;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+.plan h2{
+    font-size: 1rem;
+}
+.plan > span{
+    color: var(--gray);
+    font-weight: 500;
+}
+.yearly__planText{
+    display: none;
+}
+.plan__duration{
+    order: 3;
+}
+.active{
+    border: 1px solid var(--purpleblue);
+    background-color: var(--magnolia);
+}
+.plan:hover{
+    background-color: var(--magnolia);
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Multi-step form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sidebar start -->
+<main>
+  <aside>
+    <div class="steps">
+      <div class="step">
+        <span class="step__no">1</span>
+        <span class="step__title">step 1</span>
+        <span class="step__description">Your info</span>
+      </div>
+      <div class="step">
+        <span class="step__no">2</span>
+        <span class="step__title">step 2</span>
+        <span class="step__description">Select plan</span>
+      </div>
+      <div class="step">
+        <span class="step__no">3</span>
+        <span class="step__title">step 3</span>
+        <span class="step__description">add ons</span>
+      </div>
+      <div class="step">
+        <span class="step__no">4</span>
+        <span class="step__title">step 4</span>
+        <span class="step__description">summary</span>
+      </div>
+    </div>
+  </aside>
+  <div class="content">
+    <article class="step1__content">
+      <h1>Personal info</h1>
+      <p> Please provide your name, email address, and phone number.
+      </p>
+      <form class="form">
+        <div class="form__data">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="e.g. Stephen King">
+          <span class="error__message"></span>
+        </div>
+        <div class="form__data">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="e.g. stephenking@lorem.com">
+          <span class="error__message"></span>
+        </div>
+        <div class="form__data">
+          <label for="phone_number">Phone Number</label>
+          <input type="email" id="phone_number" placeholder="e.g. +1 234 567 890">
+          <span class="error__message"></span>
+        </div>
+      </form>
+    </article>
+    <article class="step2__content">
+      <h1>Select your plan</h1>
+      <p>You have the option of monthly or yearly billing.
+      </p>
+      <div class="plan__duration">
+        monthly
+        Yearly
+      </div>
+      <div class="plan__container">
+        <div tabindex="1" class="plan active">
+          <img src="assets/images/icon-arcade.svg" alt="">
+          <h2>Arcade</h2>
+          <span>$ <span class="plan__value">9</span>/mo</span>
+          <span class="yearly__planText">2 months free</span>
+        </div>
+        <div  tabindex="1" class="plan">
+          <img src="assets/images/icon-advanced.svg" alt="">
+          <h2>Adavanced</h2>
+          <span>$ <span class="plan__value">12</span>/mo</span>
+          <span class="yearly__planText">2 months free</span>
+        </div>
+        <div tabindex="1" class="plan">
+          <img src="assets/images/icon-pro.svg" alt="">
+          <h2>Pro</h2>
+          <span>$ <span class="plan__value">15</span>/mo</span>
+          <span class="yearly__planText">2 months free</span>
+        </div>
+        
+      </div>
+    </article>
+    <article class="step3__content">
+      <h1>Pick add-ons</h1>
+      <p>Add-ons help enhance your gaming experience.</p>
+      <div class="addons__plan">
+        <div class="addon">
+          <input type="checkbox">
+          <div class="addon__description">
+            <h2>Online service</h2>
+            <p>Access to multiplayer games</p>
+          </div>
+          <div class="addon__price">
+            <span class="addon__monthly">+$1/mo</span>
+            <span class="addon__yearly">+$10/yr</span>
+          </div>
+        </div>
+        <div class="addon">
+          <input type="checkbox">
+          <div class="addon__description">
+            <h2>Larger storage</h2>
+            <p>Extra 1TB of cloud save</p>
+          </div>
+          <div class="addon__price">
+            <span class="addon__monthly">+$2/mo</span>
+            <span class="addon__yearly">+$20/yr</span>
+          </div>
+        </div>
+        <div class="addon">
+          <input type="checkbox">
+          <div class="addon__description">
+            <h2>Customizable Profile</h2>
+            <p>Custom theme on your profile</p>
+          </div>
+          <div class="addon__price">
+            <span class="addon__monthly">+$3/mo</span>
+            <span class="addon__yearly">+$20/yr</span>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="step4__content">
+      <h1>Finishing up</h1>
+      <p>Double-check everything looks OK before confirming.</p>
+      <div class="total__container">
+        <div class="planDetails">
+          <h2>Arcade <span class="final__plan">(Monthly)</span></h2>
+          <span class="plan__price">$ <span class="plan__value">9/mo</span></span>
+          <button>Change</button>
+
+        </div>
+        <div class="totalDetails">
+          <p>Total (per <span class="plan__durationText">month</span>)</p>
+          <span class="total__value">
+            +$12/mo
+          </span>
+        </div>
+
+      </div>
+    </article>
+    <article class="step5__content">
+      <img src="assets/images/icon-thank-you.svg" alt="">
+      <h1>Thank you!</h1>
+      <p>Thanks for confirming your subscription! We hope you have fun 
+        using our platform. If you ever need support, please feel free 
+        to email us at support@loremgaming.com.
+      </p>
+    </article>
+  </div>
+</main>
+
+  
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">SG</a>.
+  </footer>
+</body>
+</html>
