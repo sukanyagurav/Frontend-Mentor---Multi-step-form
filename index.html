@@ -19,8 +19,8 @@
 <main>
   <aside>
     <div class="steps">
-      <div class="step">
-        <span class="step__no">1</span>
+      <div class="step active__form">
+        <span class="step__no ">1</span>
         <span class="step__title">step 1</span>
         <span class="step__description">Your info</span>
       </div>
@@ -42,59 +42,59 @@
     </div>
   </aside>
   <div class="content">
-    <article class="step1__content">
+    <article id="1" class="step1__content show__content">
       <h1>Personal info</h1>
       <p> Please provide your name, email address, and phone number.
       </p>
-      <form class="form">
+      <form class="form" >
         <div class="form__data">
           <label for="name">Name</label>
-          <input type="text" id="name" placeholder="e.g. Stephen King">
+          <input type="text" id="name" data-name="Name" autocomplete="off"  placeholder="e.g. Stephen King">
           <span class="error__message"></span>
         </div>
         <div class="form__data">
           <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="e.g. stephenking@lorem.com">
+          <input type="email" id="email"  data-name="Email address" autocomplete="off" placeholder="e.g. stephenking@lorem.com">
           <span class="error__message"></span>
         </div>
         <div class="form__data">
           <label for="phone_number">Phone Number</label>
-          <input type="email" id="phone_number" placeholder="e.g. +1 234 567 890">
+          <input type="email" id="phone_number" maxlength="14" autocomplete="off" data-name="Phone number"  placeholder="e.g. +1 234 567 890">
           <span class="error__message"></span>
         </div>
       </form>
     </article>
-    <article class="step2__content">
+    <article id="2" class="step2__content hide__content">
       <h1>Select your plan</h1>
       <p>You have the option of monthly or yearly billing.
       </p>
-      <div class="plan__duration">
+      <div class="plan__duration ">
         monthly
         Yearly
       </div>
       <div class="plan__container">
-        <div tabindex="1" class="plan active">
+        <button tabindex="1" class="plan active">
           <img src="assets/images/icon-arcade.svg" alt="">
           <h2>Arcade</h2>
           <span>$ <span class="plan__value">9</span>/mo</span>
           <span class="yearly__planText">2 months free</span>
-        </div>
-        <div  tabindex="1" class="plan">
+        </button>
+        <button  tabindex="1" class="plan">
           <img src="assets/images/icon-advanced.svg" alt="">
           <h2>Adavanced</h2>
           <span>$ <span class="plan__value">12</span>/mo</span>
           <span class="yearly__planText">2 months free</span>
-        </div>
-        <div tabindex="1" class="plan">
+        </button>
+        <button tabindex="1" class="plan">
           <img src="assets/images/icon-pro.svg" alt="">
           <h2>Pro</h2>
           <span>$ <span class="plan__value">15</span>/mo</span>
           <span class="yearly__planText">2 months free</span>
-        </div>
+        </button>
         
       </div>
     </article>
-    <article class="step3__content">
+    <article id="3" class="step3__content hide__content">
       <h1>Pick add-ons</h1>
       <p>Add-ons help enhance your gaming experience.</p>
       <div class="addons__plan">
@@ -133,7 +133,7 @@
         </div>
       </div>
     </article>
-    <article class="step4__content">
+    <article id="4" class="step4__content hide__content">
       <h1>Finishing up</h1>
       <p>Double-check everything looks OK before confirming.</p>
       <div class="total__container">
@@ -155,7 +155,7 @@
 
       </div>
     </article>
-    <article class="step5__content">
+    <article id="5" class="step5__content hide__content">
       <img src="assets/images/icon-thank-you.svg" alt="">
       <h1>Thank you!</h1>
       <p>Thanks for confirming your subscription! We hope you have fun 
@@ -164,6 +164,10 @@
       </p>
     </article>
   </div>
+  <div class="btn__container">
+    <button class="prev-step hide__button">Prev Step</button>
+    <button class="next-step show__button">Next Step</button>
+  </div>
 </main>
 
   
@@ -171,5 +175,6 @@
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">SG</a>.
   </footer>
+  <script src="app.js" defer></script>
 </body>
 </html>
