@@ -346,7 +346,8 @@ form{
     position: absolute;
     top:0;
     left: 0;
-    animation: fromRight2 2s ease forwards;
+    animation: fromRight2 0.7s ease forwards;
+    display: none;
 }
 .show__content{
     /* width: auto;
@@ -354,8 +355,9 @@ form{
     transform: translate(0);
     opacity: 1;
     transition: all 0.5s ease-in-out; */
+    display: block;
     position: relative;
-    animation: fromLeft2 2s ease forwards;
+    animation: fromLeft2 0.7s ease forwards;
 }
 @keyframes fromRight2 {
     0% {

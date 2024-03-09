@@ -1,7 +1,7 @@
 const allArticles = document.querySelectorAll('article')
 
 const next_Btn = document.querySelector('.next-step')
-const active__content = document.querySelector('.show__content')
+let active__content = document.querySelector('.show__content')
 
 
 const phone_number = document.getElementById('phone_number') || 0
@@ -14,7 +14,10 @@ let details ={
         email:'',
         phoneNumber:'',
     },
-    'plan':[],
+    'plan':{
+        planeName:'',
+        planValue:''
+    },
     'addOns':[]
 }
 // CHECKING THE EMPTY VALUES
@@ -43,7 +46,7 @@ function checkEmail(email){
         printError(email,'Oops! looks like you enter invalid email address')
     }else{
         removeError(email)
-        details.personalInfo.email = email
+        details.personalInfo.email = email.value
     }
 }
 
@@ -71,17 +74,21 @@ function phoneNumberFormat(value){
     
     return `${val}`
 }
-
+let currentId = +(document.querySelector('.show__content').getAttribute('id'))
+let temp = currentId
 function checkPersonalInfo(active__content){
     const form = active__content.querySelector('form')
     const errormessage= document.querySelector('.error__message')
     if(typeof userName == 'object' || typeof phone_number == 'object' || typeof email == 'object'){
         (checkEmpty(userName)  || checkEmpty(phone_number) || checkEmpty(email)) 
         checkPhoneLength()
-        details.personalInfo.name = userName
+        details.personalInfo.name = userName.value
     }
     const errorCount = document.querySelectorAll('.error')
     if(+errorCount.length == 0){
+        nextContent(active__content)
+        currentState(currentId)
+        
         return true
     }
     return false
@@ -100,37 +107,134 @@ email.addEventListener('input',(e)=>
             checkEmail(e.target)
 })
 
-let currentId = +(document.querySelector('.show__content').getAttribute('id'))
-function nextContent(active__content){
+
+function nextContent(active){
     allArticles.forEach(article=>{
         if(article.classList.contains('show__content')){
             article.classList.remove('show__content')
             article.classList.add('hide__content')
+          
         }
     })
-    ++currentId
-    console.log(currentId)
-    active__content.nextElementSibling.classList.remove('hide__content')
-    active__content.nextElementSibling.classList.add('show__content')
-  
-    return true
+    active.nextElementSibling.classList.remove('hide__content')
+    active.nextElementSibling.classList.add('show__content')
+    active__content = active.nextElementSibling
+    currentId = +(active__content.getAttribute('id'))
+    if(currentId > 1){
+        showBtn()
+    }
+    // else{
+    //     const btn = document.querySelector('.prev-step')
+    //     btn.classList.remove('show__button')
+    //     btn.classList.add('hide__button')
+    // }
 }
 
+function checkPlan(){
+    const allPlan = document.querySelectorAll('.plan')
+    allPlan.forEach(plan=>{
+        plan.addEventListener('click',function(e){
+            allPlan.forEach(btn=>{
+                if(btn.classList.contains('active')){
+                    btn.classList.remove('active')
+                }
+            })
+            plan.classList.add('active')
+            details.plan.planName= plan.querySelector('h2').innerHTML
+            details.plan.planValue = plan.querySelector('.plan__value').innerHTML
+        })
+    })
 
-
-next_Btn.addEventListener('click',function(e){
+}
+function currentState(currentId){
     switch(currentId){
         case 1:
-            checkPersonalInfo(active__content) && nextContent(active__content)
+            checkPersonalInfo(active__content)
             break
         case 2:
-            checkPlan() &&  nextContent(active__content)
+            checkPlan()
             break
         case 3:
-           
-            nextContent(active__content)
+            break
+        case 4:
             break
         default:
-            break
+        
     }
+}
+next_Btn.addEventListener('click',function(e){
+    if(currentId == 1){
+        currentState(currentId)
+    }
+    else{
+        currentId = +(active__content.getAttribute('id'))
+        currentId++
+        nextContent(active__content)
+
+    }
+    console.log(currentId)
 })
+function showBtn(){
+   if(document.querySelector('.prev-step').classList.contains('hide__button')){
+    let btn = document.querySelector('.btn__container .hide__button')
+    btn.classList.remove('hide__button')
+    btn.classList.add('show__button')
+    btn.addEventListener('click',function(e){
+                currentId = +(active__content.getAttribute('id'))
+                console.log(currentId)
+                goToPreviousPage(active__content)   
+                
+    })
+   }
+
+    
+}
+function goToPreviousPage(active){
+    allArticles.forEach(article=>{
+        if(article.classList.contains('show__content')){
+            article.classList.remove('show__content')
+            article.classList.add('hide__content')
+           
+        }
+    })
+    if(currentId > 1){
+        active.previousElementSibling.classList.remove('hide__content')
+        active.previousElementSibling.classList.add('show__content')
+        active__content = active.previousElementSibling
+    }
+  
+   
+}
+  // if(article.classList.contains('show__content')){
+           
+        //     article.classList.remove('show__content')
+        //     article.classList.add('hide__content')
+        //     active.previousElementSibling.classList.remove('hide__content')
+        //     active.previousElementSibling.classList.add('show__content')
+        //     active__content = active.previousElementSibling
+        //     currentId = +(active__content.getAttribute('id'))
+           
+        //     // currentId = +(active__content.getAttribute('id'))
+          
+        // //    if(currentId == 1){
+          
+            // currentId= +active__content.getAttribute('id')
+          //  console.log(active__content)
+        // //    }
+        // //    else{
+        // //                       // active__content = active.previousElementSibling
+                 
+        // //         active__content = active.previousElementSibling
+        // //         currentId = +(active__content.getAttribute('id'))
+        // //         console.log(currentId)
+        // //    }
+        // }
+         
+        //     if(currentId == 1){
+        //         const btn = document.querySelector('.btn__container button:first-of-type')
+        //         btn.classList.remove('show__button')
+        //         btn.classList.add('hide__button')
+        //         active__content.classList.remove('hide__content')
+        //         active__content.classList.add('show__content')
+        //         currentId = +(active__content.getAttribute('id'))
+        //     }
