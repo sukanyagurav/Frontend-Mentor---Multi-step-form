@@ -87,11 +87,9 @@ function checkPersonalInfo(active__content){
     const errorCount = document.querySelectorAll('.error')
     if(+errorCount.length == 0){
         nextContent(active__content)
-        currentState(currentId)
-        
-        return true
+        currentState(currentId)  
     }
-    return false
+
 }
 
 // EVENT LISTENERS
@@ -121,13 +119,15 @@ function nextContent(active){
     active__content = active.nextElementSibling
     currentId = +(active__content.getAttribute('id'))
     if(currentId > 1){
-        showBtn()
+        const btn = document.querySelector('.prev-step')
+        btn.classList.add('show__button')
+        btn.classList.remove('hide__button')
+    }else{
+        const btn = document.querySelector('.prev-step')
+        btn.classList.remove('show__button')
+        btn.classList.add('hide__button')
     }
-    // else{
-    //     const btn = document.querySelector('.prev-step')
-    //     btn.classList.remove('show__button')
-    //     btn.classList.add('hide__button')
-    // }
+
 }
 
 function checkPlan(){
@@ -147,6 +147,7 @@ function checkPlan(){
 
 }
 function currentState(currentId){
+    
     switch(currentId){
         case 1:
             checkPersonalInfo(active__content)
@@ -172,69 +173,41 @@ next_Btn.addEventListener('click',function(e){
         nextContent(active__content)
 
     }
-    console.log(currentId)
 })
-function showBtn(){
-   if(document.querySelector('.prev-step').classList.contains('hide__button')){
-    let btn = document.querySelector('.btn__container .hide__button')
-    btn.classList.remove('hide__button')
-    btn.classList.add('show__button')
-    btn.addEventListener('click',function(e){
-                currentId = +(active__content.getAttribute('id'))
-                console.log(currentId)
-                goToPreviousPage(active__content)   
-                
-    })
-   }
-
-    
-}
-function goToPreviousPage(active){
+let btn = document.querySelector('.prev-step')
+btn.addEventListener('click',function(e){
     allArticles.forEach(article=>{
         if(article.classList.contains('show__content')){
             article.classList.remove('show__content')
             article.classList.add('hide__content')
-           
+            article.previousElementSibling.classList.remove('hide__content')
+            article.previousElementSibling.classList.add('show__content')
+            active__content = article.previousElementSibling
+            currentId = +(active__content.getAttribute('id'))
+            console.log(currentId)
+            if(currentId ==1){
+                const btn = document.querySelector('.prev-step')
+                btn.classList.remove('show__button')
+                btn.classList.add('hide__button')
+            }
         }
     })
-    if(currentId > 1){
-        active.previousElementSibling.classList.remove('hide__content')
-        active.previousElementSibling.classList.add('show__content')
-        active__content = active.previousElementSibling
-    }
-  
-   
+})
+function showBtn(){    
+    let btn = document.querySelector('.prev-step')
+    btn.classList.remove('hide__button')
+    btn.classList.add('show__button')
+    btn.addEventListener('click',function(e){
+                currentId = +(active__content.getAttribute('id')) -1
+                if(currentId == 1){
+                    console.log(currentId)
+                    currentState(currentId)
+                }
+                else{
+                    console.log(currentId)
+                    currentId--
+                    goToPreviousPage(active__content)   
+        
+                }
+    })
 }
-  // if(article.classList.contains('show__content')){
-           
-        //     article.classList.remove('show__content')
-        //     article.classList.add('hide__content')
-        //     active.previousElementSibling.classList.remove('hide__content')
-        //     active.previousElementSibling.classList.add('show__content')
-        //     active__content = active.previousElementSibling
-        //     currentId = +(active__content.getAttribute('id'))
-           
-        //     // currentId = +(active__content.getAttribute('id'))
-          
-        // //    if(currentId == 1){
-          
-            // currentId= +active__content.getAttribute('id')
-          //  console.log(active__content)
-        // //    }
-        // //    else{
-        // //                       // active__content = active.previousElementSibling
-                 
-        // //         active__content = active.previousElementSibling
-        // //         currentId = +(active__content.getAttribute('id'))
-        // //         console.log(currentId)
-        // //    }
-        // }
-         
-        //     if(currentId == 1){
-        //         const btn = document.querySelector('.btn__container button:first-of-type')
-        //         btn.classList.remove('show__button')
-        //         btn.classList.add('hide__button')
-        //         active__content.classList.remove('hide__content')
-        //         active__content.classList.add('show__content')
-        //         currentId = +(active__content.getAttribute('id'))
-        //     }
