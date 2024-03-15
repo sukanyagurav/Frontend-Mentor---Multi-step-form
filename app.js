@@ -8,6 +8,10 @@ const phone_number = document.getElementById('phone_number') || 0
 const userName = document.getElementById('name') 
 const email = document.getElementById('email') 
 
+
+let previous_Btn = document.querySelector('.prev-step')
+
+
 let details ={
     'personalInfo':{
         name:'',
@@ -15,8 +19,9 @@ let details ={
         phoneNumber:'',
     },
     'plan':{
-        planeName:'',
-        planValue:''
+        planName:'',
+        planValue:'',
+        planType:''
     },
     'addOns':[]
 }
@@ -111,7 +116,6 @@ function nextContent(active){
         if(article.classList.contains('show__content')){
             article.classList.remove('show__content')
             article.classList.add('hide__content')
-          
         }
     })
     active.nextElementSibling.classList.remove('hide__content')
@@ -127,7 +131,19 @@ function nextContent(active){
         btn.classList.remove('show__button')
         btn.classList.add('hide__button')
     }
-
+    if(currentId ==4){
+        next_Btn.innerHTML = 'Confirm'
+        next_Btn.style.backgroundColor=`hsl(243, 100%, 62%)`
+    }
+    if(currentId==5){
+        
+        const btn = document.querySelector('.prev-step')
+        btn.classList.remove('show__button')
+        btn.classList.add('hide__button')
+        next_Btn.classList.remove('show__button')
+        next_Btn.classList.add('hide__button')
+    }
+    currentState(currentId)
 }
 
 function checkPlan(){
@@ -142,10 +158,79 @@ function checkPlan(){
             plan.classList.add('active')
             details.plan.planName= plan.querySelector('h2').innerHTML
             details.plan.planValue = plan.querySelector('.plan__value').innerHTML
+            details.plan.planType = plan.querySelector('.plan__type').innerHTML
         })
+        
     })
-
+    const plan = document.querySelector('.plan.active')
+    if(!plan.clicked){
+        details.plan.planName= plan.querySelector('h2').innerHTML
+        details.plan.planValue = plan.querySelector('.plan__value').innerHTML
+        details.plan.planType = plan.querySelector('.plan__type').innerHTML
+    }
 }
+const selectedPlans =  document.querySelectorAll('.addon input')
+let addons=[]
+function addOnPlan(){
+    const selectedPlans =  document.querySelectorAll('.addon input')
+}
+selectedPlans.forEach(plan=>{
+    plan.addEventListener('change',(e)=>{
+        if(e.target.checked){
+            details.addOns.push(e.target)
+        }else{
+            details.addOns = details.addOns.filter(item=> item.id != e.target.id)
+        }
+        console.log(details)
+    })
+})
+var btn = document.querySelector('.change')
+function createAddonPlan(){
+   const div = document.querySelector('.addon__plan')
+   div.style.display='block'
+   clearElement(div)
+   const ul =document.createElement('ul')  
+   const li = details.addOns.map(item=>{
+    console.log(item.nextElementSibling.querySelector('h2').innerHTML)
+    return `<li><span class="addon__title">${item.nextElementSibling.querySelector('h2').innerHTML}</span>
+     <span class="addon__value">${item.nextElementSibling.nextElementSibling.querySelector('span').innerHTML}</span></span>
+    </li>`
+   })
+   ul.innerHTML = li.join(' ')
+   div.append(ul)
+   return div
+}
+function clearElement(element){
+    while(element.firstChild){
+        element.removeChild(element.firstChild)
+    }
+}
+function result(){
+    const basicPlanName = document.querySelector('.basic__plan h2')
+    basicPlanName.innerHTML = `${details.plan.planName} <span class="final__plan">(${details.plan.planType})</span>`
+    const basicPlanValue = document.querySelector('.basic__plan .plan__value')
+    basicPlanValue.innerHTML=`${details.plan.planValue} / ${details.plan.planType}`
+    const planContainer = document.querySelector('.plan__details')
+    details.addOns.length>0 && planContainer.append(createAddonPlan())
+   
+}  
+btn.addEventListener('click',function(e){
+   currentId=2
+   currentState(currentId)
+   console.log(currentId)
+
+   allArticles.forEach(article=>{
+    if(article.classList.contains('show__content')){
+        article.classList.remove('show__content')
+        article.classList.add('hide__content')
+       active__content= document.getElementById(currentId)
+       active__content.classList.remove('hide__content')
+       active__content.classList.add('show__content')
+       console.log(active__content)
+    }
+    })
+ stepper()
+})
 function currentState(currentId){
     
     switch(currentId){
@@ -156,26 +241,54 @@ function currentState(currentId){
             checkPlan()
             break
         case 3:
+            addOnPlan()
             break
         case 4:
+            result()
             break
         default:
         
     }
 }
+function confirm(){
+
+}
 next_Btn.addEventListener('click',function(e){
     if(currentId == 1){
         currentState(currentId)
     }
+    
     else{
         currentId = +(active__content.getAttribute('id'))
         currentId++
         nextContent(active__content)
 
     }
+    
+    stepper()
+    
+
 })
-let btn = document.querySelector('.prev-step')
-btn.addEventListener('click',function(e){
+const allSteps = document.querySelectorAll('.step')
+const steps = document.querySelector('.steps')
+
+
+
+
+function stepper(){
+    allSteps.forEach(step=>{
+        if(step.classList.contains('active__form')){
+            step.classList.remove('active__form')
+        }
+    })
+    if(currentId < 5){
+        steps.querySelector(`.steps .step:nth-child(${currentId})`).classList.add('active__form')
+    }else{
+        steps.querySelector(`.steps .step:nth-child(${currentId-1})`).classList.add('active__form')
+    }
+}
+
+previous_Btn.addEventListener('click',function(e){
     allArticles.forEach(article=>{
         if(article.classList.contains('show__content')){
             article.classList.remove('show__content')
@@ -184,7 +297,6 @@ btn.addEventListener('click',function(e){
             article.previousElementSibling.classList.add('show__content')
             active__content = article.previousElementSibling
             currentId = +(active__content.getAttribute('id'))
-            console.log(currentId)
             if(currentId ==1){
                 const btn = document.querySelector('.prev-step')
                 btn.classList.remove('show__button')
@@ -192,22 +304,10 @@ btn.addEventListener('click',function(e){
             }
         }
     })
+    if(currentId <  4){
+        next_Btn.innerHTML = 'Next Step'
+        next_Btn.style.backgroundColor=`hsl(213, 96%, 18%)`
+    }
+    stepper()
 })
-function showBtn(){    
-    let btn = document.querySelector('.prev-step')
-    btn.classList.remove('hide__button')
-    btn.classList.add('show__button')
-    btn.addEventListener('click',function(e){
-                currentId = +(active__content.getAttribute('id')) -1
-                if(currentId == 1){
-                    console.log(currentId)
-                    currentState(currentId)
-                }
-                else{
-                    console.log(currentId)
-                    currentId--
-                    goToPreviousPage(active__content)   
-        
-                }
-    })
-}
+

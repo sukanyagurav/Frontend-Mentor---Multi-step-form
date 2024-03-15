@@ -58,9 +58,10 @@ aside{
 }
 
 .content{
-    /* flex-basis: 100%; */
+   
     overflow: hidden;
     position: relative;
+    height: 500px;
 }
 .step1__content,
 .step2__content,
@@ -71,7 +72,6 @@ aside{
     position: relative;
     top:0;
     left: 0;
-    /* display: none; */
 }
 aside{
     max-width: 260px;
@@ -260,18 +260,42 @@ form{
     align-items: center;
     border-bottom: 0.8px solid var(--light-gray);
 }
-.basic__plan a{
+.basic__plan button{
     background-color: transparent;
     border: none;
     font-size: 0.96rem;
     color: var(--gray);
    line-height: 1.5;
     text-decoration: underline;
+    text-align: left;
+    cursor: pointer;
+}
+.addon__plan{
+    display: none;
+}
+.addon__plan ul{
+    list-style: none;
+    padding: 1rem 0;
+}
+.addon__plan > span{
+    display: block;
+}
+.addon__plan .addon__title{
+    color: var(--gray);
+}
+.addon__plan .addon__value{
+    color: var(--marine-blue);
+}
+.addon__plan  ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 2.5;
 }
 .plan__price{
     justify-self: flex-end;
     grid-row: span 2;
-    font-weight: var(--marine-blue);
+    color: var(--marine-blue);
     font-weight: 700;
 }
 .totalDetails{
@@ -338,11 +362,7 @@ form{
         
 }
 .hide__content{
-    /* width: 0;
-    height: 0;
-    transform: translate(999px);
-    opacity:0;
-    transition: all 0.5s ease-in-out; */
+
     position: absolute;
     top:0;
     left: 0;
@@ -350,12 +370,9 @@ form{
     display: none;
 }
 .show__content{
-    /* width: auto;
-    height: auto;
-    transform: translate(0);
-    opacity: 1;
-    transition: all 0.5s ease-in-out; */
-    display: block;
+    display: flex;
+    flex-direction: column;
+
     position: relative;
     animation: fromLeft2 0.7s ease forwards;
 }

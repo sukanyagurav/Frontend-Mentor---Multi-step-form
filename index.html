@@ -20,7 +20,7 @@
   <aside>
     <div class="steps">
       <div class="step active__form">
-        <span class="step__no ">1</span>
+        <span class="step__no">1</span>
         <span class="step__title">step 1</span>
         <span class="step__description">Your info</span>
       </div>
@@ -73,22 +73,22 @@
         Yearly
       </div>
       <div class="plan__container">
-        <button tabindex="1" class="plan active">
+        <button class="plan active">
           <img src="assets/images/icon-arcade.svg" alt="">
           <h2>Arcade</h2>
-          <span>$ <span class="plan__value">9</span>/mo</span>
+          <span>$ <span class="plan__value">9</span>/ <span class="plan__type">mo</span></span>
           <span class="yearly__planText">2 months free</span>
         </button>
-        <button  tabindex="1" class="plan">
+        <button  class="plan">
           <img src="assets/images/icon-advanced.svg" alt="">
           <h2>Adavanced</h2>
-          <span>$ <span class="plan__value">12</span>/mo</span>
+          <span>$ <span class="plan__value">12</span>/ <span class="plan__type">mo</span></span>
           <span class="yearly__planText">2 months free</span>
         </button>
-        <button tabindex="1" class="plan">
+        <button class="plan">
           <img src="assets/images/icon-pro.svg" alt="">
           <h2>Pro</h2>
-          <span>$ <span class="plan__value">15</span>/mo</span>
+          <span>$ <span class="plan__value">15</span>/ <span class="plan__type">mo</span></span>
           <span class="yearly__planText">2 months free</span>
         </button>
         
@@ -103,7 +103,7 @@
           <label class="addon__description" for="service">
             
             <h2>Online service</h2>
-            <p>Access to multiplayer games</p>
+            <span>Access to multiplayer games</span>
           </label>
           <div class="addon__price">
             <span class="addon__monthly">+$1/mo</span>
@@ -114,7 +114,7 @@
           <input type="checkbox" id="storage">
           <label class="addon__description" for="storage">
             <h2>Larger storage</h2>
-            <p>Extra 1TB of cloud save</p>
+            <span>Extra 1TB of cloud save</span>
           </label>
           <div class="addon__price">
             <span class="addon__monthly">+$2/mo</span>
@@ -125,7 +125,7 @@
           <input type="checkbox" id="customizable">
           <label class="addon__description" for="customizable">
             <h2>Customizable Profile</h2>
-            <p>Custom theme on your profile</p>
+            <span>Custom theme on your profile</span>
           </label>
           <div class="addon__price">
             <span class="addon__monthly">+$3/mo</span>
@@ -140,10 +140,13 @@
       <div class="total__container">
         <div class="plan__details">
           <div class="basic__plan">
-            <h2>Arcade <span class="final__plan">(Monthly)</span></h2>
+            <h2></h2>
             <span class="plan__price">$ <span class="plan__value">9/mo</span></span>
-            <a>Change</a>
+            <button class="change">Change</a>
   
+          </div>
+          <div class="addon__plan">
+
           </div>
         </div>
         
@@ -166,7 +169,7 @@
     </article>
   </div>
   <div class="btn__container">
-    <button class="prev-step hide__button">Prev Step</button>
+    <button class="prev-step hide__button">Go Back</button>
     <button class="next-step show__button">Next Step</button>
   </div>
 </main>
