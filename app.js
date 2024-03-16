@@ -1,6 +1,8 @@
 const allArticles = document.querySelectorAll('article')
 
 const next_Btn = document.querySelector('.next-step')
+let previous_Btn = document.querySelector('.prev-step')
+
 let active__content = document.querySelector('.show__content')
 
 
@@ -9,7 +11,12 @@ const userName = document.getElementById('name')
 const email = document.getElementById('email') 
 
 
-let previous_Btn = document.querySelector('.prev-step')
+let selectedPlans =  document.querySelectorAll('.addon input')
+// let addons=[]
+
+// stepper
+const allSteps = document.querySelectorAll('.step')
+const steps = document.querySelector('.steps')
 
 
 let details ={
@@ -21,7 +28,8 @@ let details ={
     'plan':{
         planName:'',
         planValue:'',
-        planType:''
+        planType:'',
+        shortPlanName:''
     },
     'addOns':[]
 }
@@ -96,7 +104,29 @@ function checkPersonalInfo(active__content){
     }
 
 }
+const selectPlan = document.getElementById("select")
+const yearly = document.querySelector('.yearly');
+function updatePlan(){
+    if(!selectPlan.checked){
+        yearly.parentElement.style.color='hsl(213, 96%, 18%)'
+        yearly.parentElement.classList.add('showYearly')
+        details.plan.planType=yearly.innerHTML
+        details.plan.shortPlanName='yr'
+        details.plan.planValue=document.querySelector('.active').querySelector('.yearly__plan').querySelector('.plan__value').innerHTML
+    }
+    else{
+        yearly.parentElement.classList.remove('showYearly')
+        yearly.parentElement.style.color='hsl(231, 11%, 63%)'
+        details.plan.planType= document.querySelector('.month').innerHTML
+        details.plan.shortPlanName= 'mo'
+        details.plan.planValue=document.querySelector('.active').querySelector('.monthly__plan').querySelector('.plan__value').innerHTML
+    }
 
+}
+selectPlan.addEventListener('change',e=>{
+   e.preventDefault()
+   updatePlan()
+})
 // EVENT LISTENERS
 userName.addEventListener('input',(e)=>{checkEmpty(e.target)})
 phone_number.addEventListener('input',(e)=>{
@@ -136,7 +166,6 @@ function nextContent(active){
         next_Btn.style.backgroundColor=`hsl(243, 100%, 62%)`
     }
     if(currentId==5){
-        
         const btn = document.querySelector('.prev-step')
         btn.classList.remove('show__button')
         btn.classList.add('hide__button')
@@ -157,23 +186,32 @@ function checkPlan(){
             })
             plan.classList.add('active')
             details.plan.planName= plan.querySelector('h2').innerHTML
-            details.plan.planValue = plan.querySelector('.plan__value').innerHTML
-            details.plan.planType = plan.querySelector('.plan__type').innerHTML
+            updatePlan()
         })
-        
     })
     const plan = document.querySelector('.plan.active')
     if(!plan.clicked){
         details.plan.planName= plan.querySelector('h2').innerHTML
-        details.plan.planValue = plan.querySelector('.plan__value').innerHTML
-        details.plan.planType = plan.querySelector('.plan__type').innerHTML
+        updatePlan()
     }
 }
-const selectedPlans =  document.querySelectorAll('.addon input')
-let addons=[]
+
 function addOnPlan(){
-    const selectedPlans =  document.querySelectorAll('.addon input')
+   selectedPlans =  document.querySelectorAll('.addon input')
+   selectedPlans.forEach(plan=>{
+    if(details.plan.shortPlanName=='mo'){
+
+        plan.parentElement.querySelector('.addon__monthly').style.display='block'
+        plan.parentElement.querySelector('.addon__yearly').style.display='none'
+    }
+    else{
+        plan.parentElement.querySelector('.addon__monthly').style.display='none'
+        plan.parentElement.querySelector('.addon__yearly').style.display='block'
+    }
+  
+   })
 }
+
 selectedPlans.forEach(plan=>{
     plan.addEventListener('change',(e)=>{
         if(e.target.checked){
@@ -181,20 +219,29 @@ selectedPlans.forEach(plan=>{
         }else{
             details.addOns = details.addOns.filter(item=> item.id != e.target.id)
         }
-        console.log(details)
     })
 })
 var btn = document.querySelector('.change')
+let totalAddon = 0
 function createAddonPlan(){
    const div = document.querySelector('.addon__plan')
-   div.style.display='block'
    clearElement(div)
+   div.style.display='block'
+   totalAddon = 0
    const ul =document.createElement('ul')  
    const li = details.addOns.map(item=>{
-    console.log(item.nextElementSibling.querySelector('h2').innerHTML)
+
+
+    if(details.plan.shortPlanName == 'mo'){
+        totalAddon+=parseInt(item.parentElement.querySelector('.addon__monthly .addon__value').innerHTML)
+        value= `<span addon__value>${item.parentElement.querySelector('.addon__monthly').innerHTML}</span>`
+    }else{
+        totalAddon+=parseInt(item.parentElement.querySelector('.addon__yearly .addon__value').innerHTML)
+        value= `<span addon__value>${item.parentElement.querySelector('.addon__yearly').innerHTML}</span>`
+    }
     return `<li><span class="addon__title">${item.nextElementSibling.querySelector('h2').innerHTML}</span>
-     <span class="addon__value">${item.nextElementSibling.nextElementSibling.querySelector('span').innerHTML}</span></span>
-    </li>`
+                <span class="addon__value">${value}</span>
+            </li>`
    })
    ul.innerHTML = li.join(' ')
    div.append(ul)
@@ -209,15 +256,29 @@ function result(){
     const basicPlanName = document.querySelector('.basic__plan h2')
     basicPlanName.innerHTML = `${details.plan.planName} <span class="final__plan">(${details.plan.planType})</span>`
     const basicPlanValue = document.querySelector('.basic__plan .plan__value')
-    basicPlanValue.innerHTML=`${details.plan.planValue} / ${details.plan.planType}`
+    basicPlanValue.innerHTML=`${details.plan.planValue} / ${details.plan.shortPlanName}`
     const planContainer = document.querySelector('.plan__details')
-    details.addOns.length>0 && planContainer.append(createAddonPlan())
-   
+    const plan__durationText = document.querySelector('.plan__durationText')
+    plan__durationText.innerHTML=details.plan.planType.slice(0,details.plan.planType.length-2).toLowerCase()
+    const total = document.querySelector('.total__value')
+
+
+    if(details.addOns.length > 0){
+       
+      
+        planContainer.append(createAddonPlan())
+        total.innerHTML=`$${+details.plan.planValue + totalAddon} / ${details.plan.shortPlanName}`
+    }else{
+        document.querySelector('.addon__plan').style.display='none' 
+        total.innerHTML=`$${details.plan.planValue} / ${details.plan.shortPlanName}`
+    }
+
 }  
 btn.addEventListener('click',function(e){
    currentId=2
    currentState(currentId)
-   console.log(currentId)
+   next_Btn.innerHTML = 'Next'
+   next_Btn.style.backgroundColor=`hsl(213, 96%, 18%)`
 
    allArticles.forEach(article=>{
     if(article.classList.contains('show__content')){
@@ -226,7 +287,7 @@ btn.addEventListener('click',function(e){
        active__content= document.getElementById(currentId)
        active__content.classList.remove('hide__content')
        active__content.classList.add('show__content')
-       console.log(active__content)
+     
     }
     })
  stepper()
@@ -250,9 +311,7 @@ function currentState(currentId){
         
     }
 }
-function confirm(){
 
-}
 next_Btn.addEventListener('click',function(e){
     if(currentId == 1){
         currentState(currentId)
@@ -264,13 +323,8 @@ next_Btn.addEventListener('click',function(e){
         nextContent(active__content)
 
     }
-    
     stepper()
-    
-
 })
-const allSteps = document.querySelectorAll('.step')
-const steps = document.querySelector('.steps')
 
 
 

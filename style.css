@@ -61,7 +61,7 @@ aside{
    
     overflow: hidden;
     position: relative;
-    height: 500px;
+
 }
 .step1__content,
 .step2__content,
@@ -158,12 +158,12 @@ form{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    order: 2;
+   order: 2;
     gap: 1rem;
     margin: 2rem 0;
 }
 .plan{
-   
+    text-align: left;
     padding: 1.5rem 1rem;
     border: 1px solid var(--light-gray);
     border-radius: 10px;
@@ -195,6 +195,80 @@ form{
 .plan:hover{
     background-color: var(--magnolia);
 }
+.plan__duration.showYearly ~ .plan__container .yearly__planText{
+    display: block;
+}
+.yearly__plan,.plan__duration.showYearly ~ .plan__container .monthly__plan{
+    display: none;
+}
+.plan__duration.showYearly ~ .plan__container .yearly__plan{
+    display: block;
+}
+.plan__duration{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    color: var(--gray) !important;
+    font-weight: 700;
+}
+.toggle{
+    visibility: hidden;
+    width: 0;
+}
+.label{
+    background-color: var(--marine-blue);
+    border-radius: 50px;
+    width: 3rem;
+    height: 1.6rem;
+    cursor:pointer;
+    display: inline-block;
+    position: relative;
+   
+}
+
+.ball{
+    background-color: var(--white);
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    animation: slideOff 0.3s linear forwards;
+
+}
+.toggle:checked + .label .ball{
+    animation: slideOn 0.3s linear forwards;
+}
+
+.toggle:checked ~ .month{
+    color: var(--marine-blue);
+}
+.plan__duration .yearly{
+   margin-right: 1rem;
+} 
+.toggle ~ .month{
+    margin-left: 1rem;
+}
+@keyframes slideOn {
+    0% {
+      transform: translateX(0) scale(1);
+    }
+    100% {
+      transform: translateX(20px) scale(1);
+    }
+  }
+  
+@keyframes slideOff {
+    0% {
+      transform: translateX(20px) scale(1);
+    }
+    100% {
+      transform: translateX(0) scale(1);
+    }
+}
+
 /* step 3  */
 .step3__content{
   width: 100%;
@@ -334,6 +408,7 @@ form{
     border-radius: 5px;
     border-color: transparent;
     cursor: pointer;
+    width: 100px;
 }
 .error{
     border: 1px solid var(--red) !important;

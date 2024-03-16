@@ -68,31 +68,49 @@
       <h1>Select your plan</h1>
       <p>You have the option of monthly or yearly billing.
       </p>
-      <div class="plan__duration ">
-        monthly
-        Yearly
-      </div>
+      <div class="plan__duration" >
+   
+        <label for="select"   class="yearly">Yearly</label>
+        <input type="checkbox" id="select" class="toggle" checked aria-labelledby="Please select a plan">
+        <!-- <div class="toggle__container"  > -->
+          <label role="checkbox" tabindex="4"   for="select" class="label" >
+            <div class="ball" ></div>
+          </label>
+        <!-- </div> -->
+       
+        <label for="select"   class="month">Monthly</label>
+    </div>
       <div class="plan__container">
-        <button class="plan active">
+        <button tabindex="1" class="plan active">
           <img src="assets/images/icon-arcade.svg" alt="">
           <h2>Arcade</h2>
-          <span>$ <span class="plan__value">9</span>/ <span class="plan__type">mo</span></span>
+          <span class="monthly__plan">$ <span class="plan__value">9</span>/ <span class="plan__type">mo</span></span>
+
+          <span class="yearly__plan">$ <span class="plan__value">90</span>/ <span class="plan__type">yr</span></span>
+
           <span class="yearly__planText">2 months free</span>
         </button>
-        <button  class="plan">
+        <button tabindex="2"  class="plan">
           <img src="assets/images/icon-advanced.svg" alt="">
           <h2>Adavanced</h2>
-          <span>$ <span class="plan__value">12</span>/ <span class="plan__type">mo</span></span>
+          <span class="monthly__plan">$ <span class="plan__value">12</span>/ <span class="plan__type">mo</span></span>
+
+          <span class="yearly__plan">$ <span class="plan__value">120</span>/ <span class="plan__type">yr</span></span>
+
           <span class="yearly__planText">2 months free</span>
         </button>
-        <button class="plan">
+        <button tabindex="3" class="plan">
           <img src="assets/images/icon-pro.svg" alt="">
           <h2>Pro</h2>
-          <span>$ <span class="plan__value">15</span>/ <span class="plan__type">mo</span></span>
+          <span class="monthly__plan">$ <span class="plan__value">15</span>/ <span class="plan__type">mo</span></span>
+
+          <span class="yearly__plan">$ <span class="plan__value">150</span>/ <span class="plan__type">yr</span></span>
+
           <span class="yearly__planText">2 months free</span>
         </button>
         
       </div>
+   
     </article>
     <article id="3" class="step3__content hide__content">
       <h1>Pick add-ons</h1>
@@ -106,8 +124,10 @@
             <span>Access to multiplayer games</span>
           </label>
           <div class="addon__price">
-            <span class="addon__monthly">+$1/mo</span>
-            <span class="addon__yearly">+$10/yr</span>
+            <span class="addon__monthly">$ <span class="addon__value">1</span>/ <span class="addon__type">mo</span></span>
+
+            <span class="addon__yearly">$ <span class="addon__value">10</span>/ <span class="addon__type">yr</span></span>
+  
           </div>
         </div>
         <div class="addon">
@@ -117,8 +137,10 @@
             <span>Extra 1TB of cloud save</span>
           </label>
           <div class="addon__price">
-            <span class="addon__monthly">+$2/mo</span>
-            <span class="addon__yearly">+$20/yr</span>
+            <span class="addon__monthly">$ <span class="addon__value">2</span>/ <span class="addon__type">mo</span></span>
+
+            <span class="addon__yearly">$ <span class="addon__value">20</span>/ <span class="addon__type">yr</span></span>
+      
           </div>
         </div>
         <div class="addon">
@@ -128,8 +150,9 @@
             <span>Custom theme on your profile</span>
           </label>
           <div class="addon__price">
-            <span class="addon__monthly">+$3/mo</span>
-            <span class="addon__yearly">+$20/yr</span>
+            <span class="addon__monthly">$ <span class="addon__value">3</span>/ <span class="addon__type">mo</span></span>
+
+            <span class="addon__yearly">$ <span class="addon__value">20</span>/ <span class="addon__type">yr</span></span>
           </div>
         </div>
       </div>
@@ -141,7 +164,7 @@
         <div class="plan__details">
           <div class="basic__plan">
             <h2></h2>
-            <span class="plan__price">$ <span class="plan__value">9/mo</span></span>
+            <span class="plan__price">$ <span class="plan__value"></span></span>
             <button class="change">Change</a>
   
           </div>
@@ -151,9 +174,9 @@
         </div>
         
         <div class="totalDetails">
-          <p>Total (per <span class="plan__durationText">month</span>)</p>
+          <p>Total (per <span class="plan__durationText"></span>)</p>
           <span class="total__value">
-            +$12/mo
+            <!-- +$12/mo -->
           </span>
         </div>
 
