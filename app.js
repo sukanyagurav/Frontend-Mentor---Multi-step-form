@@ -234,7 +234,7 @@ function createAddonPlan(){
         totalAddon+=parseInt(item.parentElement.querySelector('.addon__yearly .addon__value').innerHTML)
         value= `<span addon__value>${item.parentElement.querySelector('.addon__yearly').innerHTML}</span>`
     }
-    return `<li><span class="addon__title">${item.nextElementSibling.querySelector('h2').innerHTML}</span>
+    return `<li><span class="addon__title">${item.nextElementSibling.querySelector('span').innerHTML}</span>
                 <span class="addon__value">${value}</span>
             </li>`
    })

@@ -298,8 +298,11 @@ form{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.addon h2,.total__container h2{
+.addon__description span:first-of-type,.total__container h2{
     font-size: 1rem;
+    font-weight: 700;
+    display: block;
+    color: var(--marine-blue);
 }
 .addon input[type='checkbox']{
     width: 20px;
