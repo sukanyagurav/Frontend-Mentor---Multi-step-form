@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+a{
+    color: currentColor;
+    text-decoration: none;
+}
 :root{
     --marine-blue: hsl(213, 96%, 18%);
     --purpleblue: hsl(243, 100%, 62%);
@@ -19,7 +23,6 @@
 body{
     font-family: "Ubuntu", sans-serif;
     display: flex;
-    /* height: 100vh; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -174,6 +177,7 @@ form{
     gap: 0.3rem;
     transition: all 0.5s ease-in-out;
     cursor: pointer;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 .plan h2{
     font-size: 1rem;
@@ -208,13 +212,13 @@ form{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2rem 0;
+  
     color: var(--gray) !important;
     font-weight: 700;
 }
 .toggle{
-    visibility: hidden;
-    width: 0;
+    opacity: 0.2;
+    position: absolute;
 }
 .label{
     background-color: var(--marine-blue);
@@ -224,7 +228,7 @@ form{
     cursor:pointer;
     display: inline-block;
     position: relative;
-   
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .ball{
@@ -258,7 +262,7 @@ form{
     100% {
       transform: translateX(20px) scale(1);
     }
-  }
+}
   
 @keyframes slideOff {
     0% {
@@ -288,6 +292,7 @@ form{
     width: 100%;
     gap: 0.8rem;
     transition: all 0.5s ease-in;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .addon h2,.total__container h2{
@@ -386,7 +391,6 @@ form{
 
 /* step 5 */
 .step5__content{
-    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -409,6 +413,7 @@ form{
     border-color: transparent;
     cursor: pointer;
     width: 100px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 .error{
     border: 1px solid var(--red) !important;
@@ -509,12 +514,12 @@ form{
         justify-content: space-between;
         
     }
+    .btn__container button{
+        margin-bottom: 2.5rem;
+    }
     footer{
-        /* margin-top: 1rem; */
-        position: absolute;
-        bottom: 0rem;
-        left: 0;
-        padding: 0 1rem 0;
+        position: relative;
+        padding: 1rem;
     }
     aside{
         position: absolute;
@@ -558,6 +563,9 @@ form{
     }
 }
 @media (max-width:500px) {
+    main{
+        height: 600px;
+    }
     .plan{
         grid-template-columns: 50px 1fr;
         grid-template-rows: auto;
@@ -571,8 +579,12 @@ form{
     .plan img{
         grid-row: span 2;
     }
-    .plan > span{
+    .plan > .monthly__plan , .plan > .yearly__plan{
         grid-row: 2/3;
+        grid-column: 2/3;
+    }
+    .plan .yearly__planText{
+        grid-row: 3/4;
         grid-column: 2/3;
     }
 }
