@@ -69,9 +69,6 @@ function checkEmail(email){
     }
 }
 
-function getStringWithNumbersOnly(str){
-    return [...str].filter((v)=>Number.isInteger(+v) && v!='').join('')
-}
 
 function checkPhoneLength(){
     if(phone_number.value.length < 14){
@@ -84,13 +81,20 @@ function checkPhoneLength(){
 }
 
 function phoneNumberFormat(value){
-    value = value.replace(/\s+ \+ +/g, "").replace(/[^0-9]/gi, "");
-    let val=''
-    if(value){
-        val = `+${value[0]} ${value.slice(1,4)} ${value.slice(4,7)} ${value.slice(7,)}`
-        details.personalInfo.phoneNumber = val
+    value = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+    const parts = [];
+    for (let i = 1; i < value.length; i += 3) {
+        parts.push(value.substr(i, 3));
     }
-    return `${val}`
+    let val=''
+    if(parts.length > 1){
+        val+=`+${value[0]} ${parts.join(" ")}`
+    }
+    else{
+        val+=value
+    }
+
+ return val
 }
 
 function checkPersonalInfo(active__content){
@@ -139,9 +143,7 @@ function updatePlan(){
 // EVENT LISTENERS
 userName.addEventListener('input',(e)=>{checkEmpty(e.target)})
 phone_number.addEventListener('input',(e)=>{
-    phone_number.value = getStringWithNumbersOnly(phone_number.value)
-    phone_number.value = phoneNumberFormat((phone_number.value))
-    checkPhoneLength()
+   phone_number.value = phoneNumberFormat((phone_number.value))
 })
 
 email.addEventListener('input',(e)=>
